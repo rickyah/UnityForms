@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 
-namespace SP.ToolsUnityClient
+namespace UnityForms
 {    
     public static class Package
     {
