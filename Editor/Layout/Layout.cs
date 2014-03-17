@@ -3,52 +3,47 @@ using System;
 
 namespace UnityForms.Layouts
 {
-    
-    public static class Layout
+    public abstract class Layout : IDisposable
     {
-        public class OutlineLayoutHelper
-        {
-            public HorizontalLayout Horizontal 
-            {
-                get
-                {
-                    return new HorizontalLayout(GUI.skin.box);    
-                }
-            }
-            
-            public VerticalLayout Vertical 
-            {
-                get
-                {
-                    return new VerticalLayout(GUI.skin.box);    
-                }
-            }
-        }
-        
-        public static OutlineLayoutHelper Outlined = new OutlineLayoutHelper();
-        
+        GUIStyle _style;
+        bool _isInLayout = false;
 
-        public static HorizontalLayout HorizontalWithStyle(GUIStyle style)
+        public Layout() : this(GUIStyle.none)
         {
-        
-            return new HorizontalLayout(style);
-        
+            
         }
-        public static HorizontalLayout Horizontal 
+
+        public Layout(GUIStyle style)
         {
-            get
+            _style = style;
+        }
+
+        public void BeginLayout()
+        {
+            StartLayoutAbstractMethod(_style);
+            _isInLayout = true;
+        }
+
+        public void EndLayout()
+        {
+            EndLayoutAbstractMethod();
+            _isInLayout = false;
+        }
+
+        protected abstract void StartLayoutAbstractMethod(GUIStyle style);
+
+        protected abstract void EndLayoutAbstractMethod();
+
+        #region IDisposable implementation
+
+        public void Dispose()
+        {
+            if (_isInLayout)
             {
-                return new HorizontalLayout();    
+                EndLayout();
             }
         }
-        
-        public static VerticalLayout Vertical 
-        {
-            get
-            {
-                return new VerticalLayout();    
-            }
-        }
+
+        #endregion
     }
-    
 }

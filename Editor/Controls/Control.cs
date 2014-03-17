@@ -101,8 +101,11 @@ namespace UnityForms
                 control.Paint();
             }
             
+            this.OnPaintFinish();
+            
             GUI.enabled = true;
         }
+
         #endregion
 
         #region Abstract Method Pattern
@@ -173,6 +176,12 @@ namespace UnityForms
         {
             // blank
         }
+
+        protected virtual void OnPaintFinish()
+        {
+            // blank
+        }
+
         #endregion
     }
 }

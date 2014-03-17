@@ -3,23 +3,24 @@ using UnityEngine;
 
 namespace UnityForms.Layouts
 {
-    public class HorizontalLayout : IDisposable
+    public class HorizontalLayout : Layout
     {
-        public HorizontalLayout(GUIStyle style)
+        public HorizontalLayout()
+        {
+        }
+
+        public HorizontalLayout(GUIStyle style) : base(style)
+        {
+        }
+
+        protected override void StartLayoutAbstractMethod(GUIStyle style)
         {
             GUILayout.BeginHorizontal(style);
         }
 
-        public HorizontalLayout()
-        {
-            GUILayout.BeginHorizontal();
-        }
-
-        public void Dispose()
+        protected override void EndLayoutAbstractMethod()
         {
             GUILayout.EndHorizontal();
         }
-        
     }
-    
 }
