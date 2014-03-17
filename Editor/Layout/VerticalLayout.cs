@@ -20,7 +20,5 @@ namespace UnityForms.Layouts
         {
             GUILayout.EndVertical();
         }
-        
     }
-    
 }

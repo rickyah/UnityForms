@@ -11,26 +11,27 @@ namespace UnityForms
     public abstract class Control
     {
         #region Initialization
-        public Control(string text):this()
+
+        public Control(string text) : this()
         {
             Text = text;
         }
-        
-        public Control(string text, Control parent) :this(text)
+
+        public Control(string text, Control parent) : this(text)
         {
             SetParent(parent);
         }
-        
+
         public Control()
         {
             Enabled = true;
             Controls = new ControlCollection();
-           
+
             BindEvents();
         }
-        
+
         protected virtual void BindEvents()
-        {
+            {
             Controls.Added += (sender, e) => {
                 OnControlAdded(new ControlEventArgs(e.Object));
             };
@@ -40,14 +41,15 @@ namespace UnityForms
             };
         }
         #endregion
-        
-				
+
+
         #region Events
         public event EventHandler<ControlEventArgs> ControlAdded;
         public event EventHandler<ControlEventArgs> ControlRemoved;
         #endregion
-        
+
         #region OnEvents
+
         protected virtual void OnControlAdded(ControlEventArgs args)
         {
             if (ControlAdded != null)
@@ -55,7 +57,7 @@ namespace UnityForms
                 ControlAdded(this, args);
             }
         }
-        
+
         protected virtual void OnControlRemoved(ControlEventArgs args)
         {
             if (ControlRemoved != null)
@@ -63,35 +65,36 @@ namespace UnityForms
                 ControlRemoved(this, args);
             }
         }
-        #endregion 
-        
-        
-        #region Properties
-        
-        public Control Parent {get; private set;}
-        
-        public ControlCollection Controls {get; private set;}
+
         #endregion
-        
+
+        #region Properties
+
+        public Control Parent { get; private set; }
+
+        public ControlCollection Controls { get; private set; }
+
+        #endregion
+
         #region Public Methods
+
         public void SetParent(Control parent)
         {
             Parent = parent;
         }
-        
-        public string Text {get; set;}
-        
+
+        public string Text { get; set; }
+
         public bool Enabled { get; set; }
-        
+
         public void Paint()
         {
-            
             GUI.enabled = Enabled;
 
             this.OnPaint();
             ProcessEvents();
             
-            foreach(var control in Controls)
+            foreach (var control in Controls)
             {
                 control.Paint();
             }
@@ -99,34 +102,34 @@ namespace UnityForms
             GUI.enabled = true;
         }
         #endregion
-        
+
         #region Abstract Method Pattern
 
         public event EventHandler<MouseEventArgs> MouseDown;
         public event EventHandler<MouseEventArgs> MouseUp;
         public event EventHandler Click;
-        
+
         protected virtual void OnMouseDown(MouseEventArgs args)
         {
-            if(MouseDown != null)
+            if (MouseDown != null)
                 MouseDown(this, args);
         }
-        
+
         protected virtual void OnMouseUp(MouseEventArgs args)
         {
-            if(MouseUp != null)
+            if (MouseUp != null)
                 MouseUp(this, args);
             
         }
-        
+
         protected virtual void OnClick()
         {
-            if(Click != null)
+            if (Click != null)
                 Click(this, EventArgs.Empty);
         }
 
         private readonly int _unityControlId;
-        
+
         protected void ProcessEvents()
         {
             if (!Enabled)
@@ -162,7 +165,7 @@ namespace UnityForms
             
            
         }
-              
+
         protected virtual void OnPaint()
         {
             // blank

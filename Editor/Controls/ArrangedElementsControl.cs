@@ -1,12 +1,4 @@
 using System;
-using System.IO;
-using System.Linq;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using UnityEngine;
-using UnityEditor;
-using System.Collections;
-
 
 namespace UnityForms
 {
@@ -17,6 +9,7 @@ namespace UnityForms
         public event EventHandler SelectedIndexChanged;
 
         TCollection items;
+
         public TCollection Items
         {
             get
@@ -65,7 +58,6 @@ namespace UnityForms
             InitDataStructures();
         }
         
-
         public ArrangedElementsControl()
         {
             InitDataStructures();
@@ -103,5 +95,4 @@ namespace UnityForms
             }
         }
     }
-    
 }
