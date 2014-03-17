@@ -19,7 +19,7 @@ namespace UnityForms
             protected set
             {
                 items = value;
-                BindEvents();
+                BindItemEvents();
             }
         }
 
@@ -28,9 +28,10 @@ namespace UnityForms
             _selectedIndex = 0;
         }
 
-        protected virtual void BindEvents()
+        protected virtual void BindItemEvents()
         {
-            Items.Added += (s, a) => {
+            Items.Added += (s, a) =>
+        {
                 
             };
             

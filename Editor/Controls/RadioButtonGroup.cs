@@ -12,7 +12,7 @@ namespace UnityForms
 {
     public class RadioButtonGroup : ListControl
     {    
-        protected override void BindEvents()
+        protected override void BindItemEvents()
         {
             this.ControlAdded += (object thisGroup, ControlEventArgs addedCtrlArgs) => {
                 var ctrl = addedCtrlArgs.Control as RadioButton;

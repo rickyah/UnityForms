@@ -26,26 +26,29 @@ namespace UnityForms
         {
             Enabled = true;
             Controls = new ControlCollection();
-
-            BindEvents();
+            BindChildControlEvents();
         }
 
-        protected virtual void BindEvents()
+        protected virtual void BindChildControlEvents()
+        {
+            Controls.Added += (sender, e) =>
             {
-            Controls.Added += (sender, e) => {
                 OnControlAdded(new ControlEventArgs(e.Object));
             };
             
-            Controls.Removed += (sender, e) => {
+            Controls.Removed += (sender, e) =>
+            {
                 OnControlRemoved(new ControlEventArgs(e.Object));
             };
         }
+
         #endregion
 
-
         #region Events
+
         public event EventHandler<ControlEventArgs> ControlAdded;
         public event EventHandler<ControlEventArgs> ControlRemoved;
+
         #endregion
 
         #region OnEvents
@@ -92,7 +95,6 @@ namespace UnityForms
             GUI.enabled = Enabled;
 
             this.OnPaint();
-            ProcessEvents();
             
             foreach (var control in Controls)
             {
@@ -105,9 +107,10 @@ namespace UnityForms
 
         #region Abstract Method Pattern
 
+        public event EventHandler Click;
+        /*
         public event EventHandler<MouseEventArgs> MouseDown;
         public event EventHandler<MouseEventArgs> MouseUp;
-        public event EventHandler Click;
 
         protected virtual void OnMouseDown(MouseEventArgs args)
         {
@@ -121,13 +124,13 @@ namespace UnityForms
                 MouseUp(this, args);
             
         }
-
+        */
         protected virtual void OnClick()
         {
             if (Click != null)
                 Click(this, EventArgs.Empty);
         }
-
+        /*
         private readonly int _unityControlId;
 
         protected void ProcessEvents()
@@ -165,7 +168,7 @@ namespace UnityForms
             
            
         }
-
+        */
         protected virtual void OnPaint()
         {
             // blank
