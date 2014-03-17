@@ -1,9 +1,4 @@
-using System;
-using System.IO;
 using System.Linq;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using UnityEngine;
 using UnityEditor;
 
 namespace UnityForms
@@ -18,7 +13,6 @@ namespace UnityForms
         {
         }
         
-
         public ComboBox(string text, Control parent) : base(text, parent)
         {
         }
@@ -37,5 +31,4 @@ namespace UnityForms
             SelectedIndex = EditorGUILayout.Popup(SelectedIndex, Items.Select(i => i.ToString()).ToArray());
         }
     }
-   
 }
