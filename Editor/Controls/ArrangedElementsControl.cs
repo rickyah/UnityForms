@@ -31,48 +31,48 @@ namespace UnityForms
         protected virtual void BindItemEvents()
         {
             Items.Added += (s, a) =>
-        {
+            {
                 
             };
             
-            Items.Removed += (s, a) => {
-                _selectedIndex = 0;
-                
-            };
-            
-            
-            Items.Cleared += (s, a) => {
+            Items.Removed += (s, a) =>
+            {
                 _selectedIndex = 0;
             };
             
+            
+            Items.Cleared += (s, a) =>
+            {
+                _selectedIndex = 0;
+            };
+            
                 
-        }     
+        }
 
         public ArrangedElementsControl(string text) : base(text)
         {
-            InitDataStructures();;
+            InitDataStructures();
         }
-        
 
         public ArrangedElementsControl(string text, Control parent) : base(text, parent)
         {
             InitDataStructures();
         }
-        
+
         public ArrangedElementsControl()
         {
             InitDataStructures();
         }
-        
+
         protected virtual void OnSelectedIndexChanged(int oldValue, int newValue)
         {
             if (newValue != oldValue)
             {
-                if(SelectedIndexChanged != null)
+                if (SelectedIndexChanged != null)
                     SelectedIndexChanged(this, EventArgs.Empty);
             } 
         }
-        
+
         public int SelectedIndex
         {
             get
