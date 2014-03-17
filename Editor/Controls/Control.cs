@@ -6,21 +6,8 @@ using System.Collections.ObjectModel;
 using UnityEngine;
 using UnityEditor;
 
-namespace UnityForms.Controls
+namespace UnityForms
 {
-    public class ControlEventArgs : EventArgs
-    {
-        public ControlEventArgs(Control control)
-        {
-            this.Control = control;
-        }
-        
-        public Control Control
-        {
-            get; private set;
-        }
-    }
-    
     public abstract class Control
     {
         #region Initialization
@@ -98,9 +85,11 @@ namespace UnityForms.Controls
         
         public void Paint()
         {
+            
             GUI.enabled = Enabled;
 
             this.OnPaint();
+            ProcessEvents();
             
             foreach(var control in Controls)
             {
@@ -112,7 +101,68 @@ namespace UnityForms.Controls
         #endregion
         
         #region Abstract Method Pattern
-                
+
+        public event EventHandler<MouseEventArgs> MouseDown;
+        public event EventHandler<MouseEventArgs> MouseUp;
+        public event EventHandler Click;
+        
+        protected virtual void OnMouseDown(MouseEventArgs args)
+        {
+            if(MouseDown != null)
+                MouseDown(this, args);
+        }
+        
+        protected virtual void OnMouseUp(MouseEventArgs args)
+        {
+            if(MouseUp != null)
+                MouseUp(this, args);
+            
+        }
+        
+        protected virtual void OnClick()
+        {
+            if(Click != null)
+                Click(this, EventArgs.Empty);
+        }
+
+        private readonly int _unityControlId;
+        
+        protected void ProcessEvents()
+        {
+            if (!Enabled)
+                return;
+           
+            var evt = Event.current;
+            var rect = GUILayoutUtility.GetLastRect();
+            
+            switch (evt.type)
+            {
+                case EventType.MouseDown:
+                    if (rect.Contains(evt.mousePosition))
+                    {
+                        this.OnMouseDown(new MouseEventArgs(evt.button, evt.mousePosition, evt.clickCount));
+                    }
+                    
+                    break;
+                case EventType.MouseUp:
+                    if (rect.Contains(evt.mousePosition))
+                    {
+                        this.OnMouseUp(new MouseEventArgs(evt.button, evt.mousePosition, evt.clickCount));
+                        this.OnClick();
+                    }
+                    
+                    break;
+                case EventType.MouseMove:
+                    break;
+                case EventType.KeyDown:
+                    break;
+                case EventType.KeyUp:
+                    break;
+            }
+            
+           
+        }
+              
         protected virtual void OnPaint()
         {
             // blank

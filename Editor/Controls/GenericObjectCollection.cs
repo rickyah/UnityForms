@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections;
 
-namespace UnityForms.Controls
+namespace UnityForms
 {
     public class GenericObjectCollectionEventArgs<T> : EventArgs
     {

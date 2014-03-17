@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using UnityEngine;
 using UnityEditor;
 
-namespace UnityForms.Controls
+namespace UnityForms
 {
     
     public class Label : Control

@@ -8,7 +8,7 @@ using UnityEditor;
 using System.Collections;
 
 
-namespace UnityForms.Controls
+namespace UnityForms
 {
     public abstract class ArrangedElementsControl<TCollection, TItem> : Control where TCollection : GenericObjectCollection<TItem> where TItem : new()
     {

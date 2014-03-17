@@ -8,7 +8,7 @@ using UnityEditor;
 
 using UnityForms.Layouts;
 
-namespace UnityForms.Controls
+namespace UnityForms
 {
     public class RadioButtonGroup : ListControl
     {    
