@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.VersionControl;
+using NUnit.Framework;
 
 namespace UnityForms
 {
@@ -47,6 +49,7 @@ namespace UnityForms
         #region Events
 
         public event EventHandler<ControlEventArgs> ControlAdded;
+
         public event EventHandler<ControlEventArgs> ControlRemoved;
 
         #endregion
@@ -180,6 +183,21 @@ namespace UnityForms
         protected virtual void OnPaintFinish()
         {
             // blank
+        }
+
+        protected T GetParentControl<T>() where T : Control
+        {
+            if (typeof(T) == this.GetType())
+            {
+                return this as T;
+            }
+            
+            if (Parent == null)
+            {
+                return null;
+            }
+            
+            return Parent.GetParentControl<T>();
         }
 
         #endregion
