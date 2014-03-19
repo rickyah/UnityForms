@@ -27,8 +27,11 @@ namespace UnityForms
         #region Events
 
         public event EventHandler<GenericObjectCollectionEventArgs<T>> Added;
+
         public event EventHandler Cleared;
+
         public event EventHandler Changed;
+
         public event EventHandler<GenericObjectCollectionEventArgs<T>> Removed;
 
         #endregion
@@ -68,12 +71,22 @@ namespace UnityForms
 
         #region IList implementation
 
-        public void Add(T value)
+        public void Add(object value)
         {
-            this.Add(new T[] { value });
+            this.Add((T)value);
         }
 
-        public void Add(IEnumerable<T> values)
+        public void Add(T value)
+        {
+            this.AddRange(new T[] { value });
+        }
+
+        public void AddRange(IEnumerable values)
+        {
+            this.AddRange(values.Cast<T>());
+        }
+
+        public void AddRange(IEnumerable<T> values)
         {
             foreach (var value in values)
             {
