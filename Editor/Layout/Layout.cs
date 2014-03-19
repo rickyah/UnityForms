@@ -6,7 +6,7 @@ namespace UnityForms.Layouts
     public abstract class Layout : IDisposable
     {
         GUIStyle _style;
-        bool _isInLayout = false;
+        bool _isInLayout;
 
         public Layout() : this(GUIStyle.none)
         {
