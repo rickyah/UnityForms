@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityForms;
+using System;
 
 namespace UnityForms
 {
-    public class Panel : ScrollableControl
+    public class Panel : Control
     {
         public UnityForms.Layouts.Layout Layout { get; set; }
 
@@ -24,7 +25,10 @@ namespace UnityForms
             }
             
             base.OnPaint();
-            
+        }
+
+        protected override void OnPaintFinish()
+        {
             if (Layout != null)
             {
                 Layout.EndLayout();

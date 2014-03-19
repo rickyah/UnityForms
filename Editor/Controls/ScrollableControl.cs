@@ -3,7 +3,7 @@ using UnityForms;
 
 namespace UnityForms
 {
-    public abstract class ScrollableControl : Control
+    public abstract class ScrollableControl : Panel
     {
         Vector2 _scrollPosition = new Vector2();
 
