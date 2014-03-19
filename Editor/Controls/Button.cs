@@ -18,7 +18,7 @@ namespace UnityForms
 
         protected override void OnPaint()
         {
-            if (GUILayout.Button(this.Text))
+            if (GUILayout.Button(this.Text, this.ComputeLayoutOptions()))
             {
                 this.OnClick();
             }
