@@ -1,0 +1,11 @@
+{
+  "name": "UnityForms",
+  "version": "0.0.1",
+  "homepage": "https://github.com/rickyah/UnityForms",
+  "authors": [
+    "Ricardo Amores <rickyah@gmail.com>"
+  ],
+  "description": "UnityForms is a Editor GUI system for Unity3D Engine with a heavy inspiration from WinForms",
+  "license": "MIT",
+  "private": true
+}
