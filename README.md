@@ -3,8 +3,7 @@ UnityForms
 
 UnityForms is a Editor GUI system with a heavy inspiration from WinForms
 
-** Motivation** 
-
+**Motivation**
 Unity3D immediate mode GUI is not really well suited for creating nice editor interfaces for custom tools.
 The drawing code pollutes the OnGUI method which also makes difficult to separate concerns.
 

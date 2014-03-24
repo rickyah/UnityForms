@@ -1,25 +1,26 @@
 using UnityEngine;
+using UnityForms.Layouts;
 
 namespace UnityForms.Layouts
 {
     public class VerticalLayout : Layout
     {
-        public VerticalLayout()
+        protected override void StartLayoutAbstractMethod()
         {
-        }
-
-        public VerticalLayout(GUIStyle style) : base(style)
-        {
-        }
-
-        protected override void StartLayoutAbstractMethod(GUIStyle style)
-        {
-            GUILayout.BeginVertical(style);
+            GUILayout.BeginVertical();
         }
 
         protected override void EndLayoutAbstractMethod()
         {
             GUILayout.EndVertical();
+        }
+    }
+
+    public class VerticalLayoutOutlined : VerticalLayout
+    {
+        protected override void StartLayoutAbstractMethod()
+        {
+            GUILayout.BeginVertical(GUI.skin.box);
         }
     }
 }

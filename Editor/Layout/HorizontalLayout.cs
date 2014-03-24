@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityForms.Layouts;
 
 namespace UnityForms.Layouts
 {
@@ -9,18 +10,22 @@ namespace UnityForms.Layouts
         {
         }
 
-        public HorizontalLayout(GUIStyle style) : base(style)
+        protected override void StartLayoutAbstractMethod()
         {
-        }
-
-        protected override void StartLayoutAbstractMethod(GUIStyle style)
-        {
-            GUILayout.BeginHorizontal(style);
+            GUILayout.BeginHorizontal();
         }
 
         protected override void EndLayoutAbstractMethod()
         {
             GUILayout.EndHorizontal();
+        }
+    }
+
+    public class HorizontalLayoutOutlined : HorizontalLayout
+    {
+        protected override void StartLayoutAbstractMethod()
+        {
+            GUILayout.BeginHorizontal(GUI.skin.box);
         }
     }
 }

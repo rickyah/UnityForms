@@ -6,10 +6,54 @@ using System.Collections.ObjectModel;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.VersionControl;
-using NUnit.Framework;
+
 
 namespace UnityForms
 {
+    public struct Size
+    {
+        int _height;
+        int _width;
+
+        public Size(int height, int width)
+        {
+            _height = height < 0 ? 0 : height;
+            _width = width < 0 ? 0 : width;
+        }
+
+        public int Height
+        {
+            get
+            {
+                return _height;
+            }
+            set
+            {
+                _height = (value < 0) ? 0 : value;
+            }
+        }
+
+        public int Width
+        {
+            get
+            {
+                return _width;
+            }
+            set
+            {
+                _width = (value < 0) ? 0 : value;
+            }
+        }
+
+        public bool IsEmpty
+        {
+            get
+            {
+                return (Height * Width <= 0);
+            }
+        }
+    }
+
     public abstract class Control
     {
         #region Initialization
@@ -28,6 +72,7 @@ namespace UnityForms
         {
             Enabled = true;
             Controls = new ControlCollection();
+
             BindChildControlEvents();
         }
 
@@ -42,6 +87,19 @@ namespace UnityForms
             {
                 OnControlRemoved(new ControlEventArgs(e.Object));
             };
+        }
+
+        protected GUILayoutOption[] ComputeLayoutOptions()
+        {
+            var options = new List<GUILayoutOption>();
+            
+            if (!Size.IsEmpty)
+            {
+                options.Add(GUILayout.Width(this.Size.Width));
+                options.Add(GUILayout.Height(this.Size.Height));
+            }
+            
+            return options.ToArray();
         }
 
         #endregion
@@ -92,6 +150,8 @@ namespace UnityForms
         public string Text { get; set; }
 
         public bool Enabled { get; set; }
+
+        public Size Size { get; set; }
 
         public void Paint()
         {

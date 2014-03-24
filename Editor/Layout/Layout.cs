@@ -5,32 +5,21 @@ namespace UnityForms.Layouts
 {
     public abstract class Layout : IDisposable
     {
-        GUIStyle _style;
-        bool _isInLayout;
+        protected bool IsInLayout { get; set; }
 
-        public Layout() : this(GUIStyle.none)
+        internal virtual void BeginLayout()
         {
-            
+            StartLayoutAbstractMethod();
+            IsInLayout = true;
         }
 
-        public Layout(GUIStyle style)
-        {
-            _style = style;
-        }
-
-        public void BeginLayout()
-        {
-            StartLayoutAbstractMethod(_style);
-            _isInLayout = true;
-        }
-
-        public void EndLayout()
+        internal virtual void EndLayout()
         {
             EndLayoutAbstractMethod();
-            _isInLayout = false;
+            IsInLayout = false;
         }
 
-        protected abstract void StartLayoutAbstractMethod(GUIStyle style);
+        protected abstract void StartLayoutAbstractMethod();
 
         protected abstract void EndLayoutAbstractMethod();
 
@@ -38,7 +27,7 @@ namespace UnityForms.Layouts
 
         public void Dispose()
         {
-            if (_isInLayout)
+            if (IsInLayout)
             {
                 EndLayout();
             }
